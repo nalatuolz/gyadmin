@@ -1,0 +1,4 @@
+{
+  "plugins": [
+  ["antd",{ "style": true }]]
+}
