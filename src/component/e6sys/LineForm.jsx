@@ -71,9 +71,23 @@ class LineForm extends Component {
 					businssType: rs.businssType ? rs.businssType : ""
 				}				
 		this.setState(this.state)	  
-		this.props.loadMethod()
+		this.props.loadTable()
 	}
 
+	//改变业务类型的value值
+	onTypeChange(val) {
+		alert(val)
+		if (val == 7) {
+			this.setState({"showBackReason":true})
+		}else {
+			this.setState({"showBackReason":false})
+		}
+	    let form = this.props.form
+	    form.setFieldsValue({
+	      sourcecompanyid: undefined,
+	      companyname: undefined 
+	    })
+	}
 
     render() {
   	    const { getFieldProps,getFieldValue } = this.props.form
@@ -133,7 +147,8 @@ class LineForm extends Component {
 						          {...formItemLayout}
 						            required={this.state.isValidate}
 						          label="业务类型">
-						          <Select notFoundContent="无法找到"  size='default' {...getFieldProps('businessType',{initialValue:val('businessType',1)})} >
+						          <Select notFoundContent="无法找到"  size='default'
+						           {...getFieldProps('businessType',{initialValue:val('businessType',1),onChange:this.onTypeChange.bind(this)})} >
 						             <Option value={ 1 }>配送</Option>
 						             <Option value={ 2 }>外阜</Option>
 						             <Option value={ 3 }>销退</Option>

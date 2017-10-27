@@ -12,6 +12,9 @@ class Axisline extends Component {
 	     	visible:false,
 	     	type:1
 		}
+		                console.log(this);
+
+		this.record = []
 	}
 
 	//点击定位按钮
@@ -46,6 +49,34 @@ class Axisline extends Component {
 	    });
 	}
 
+	//点击切换显示纵轴
+	handleSwitch(id){
+		var newId=this.refs.line.id
+		console.log(this.record);
+		this.record.forEach((col) => {
+			if(id === col){
+	 			 this.setState({
+	        	   display: "block",
+		         });
+
+			}else{
+				this.setState({
+		    	   display: "none",
+			    });	
+			}
+		})
+		// if(this.state.display === "none"){
+		//     this.setState({
+  //       	   display: "block",
+	 //        });
+		// }else{
+	 // 	    this.setState({
+	 //    	   display: "none",
+		//     });
+		// }
+	}
+
+
 	componentDidMount() {
 	 
     }
@@ -56,7 +87,8 @@ class Axisline extends Component {
      	const itemList =data.map((col) => {
      		var  BaseData=col.BaseData
  			var  HonNodes=col.HonNodes
- 			var  VerNodes=col.VerNodes
+ 			var  VerNodes=col.VerNodes 
+ 			this.record.push(col.ID)
   		 	return 	<div className='monitor-list'>
 	  		 			<div className='monitor-item'>
 	  		 		         <div className='monitor-tip'>
@@ -71,17 +103,24 @@ class Axisline extends Component {
 							     </Row> 
 					         </div>	
 						     <div className='monitor-des'>
-							   		  <Steps current={0} >
-										    <Step status="finish" title={HonNodes.Name} description={HonNodes.Time} />
-										    <Step status="finish" title="Progress" description="This is a descripti" />
-										    <Step status="finish" title="Waiting" description="This is a descripti" />
-										    <Step title="Waiting" description="This is a description." />
-									        <Step title="Waiting" description="This is a description." />
-									        <Step title="Waiting" description="This is a description." />
-						 			 </Steps>		
+							     	 <Row gutter={10}>
+										  <Col sm={23}>
+										  		  <Steps current={0} >
+													    <Step status="finish" title={HonNodes.Name} description={HonNodes.Time} />
+													    <Step status="finish" title="Progress" description="This is a descripti" />
+													    <Step status="finish" title="Waiting" description="This is a descripti" />
+													    <Step title="Waiting" description="This is a description." />
+												        <Step title="Waiting" description="This is a description." />
+												        <Step title="Waiting" description="This is a description." />
+									 			 </Steps>
+										  </Col>
+									      <Col sm={1}>
+									      		<Button className="btn-switch" onClick={this.handleSwitch.bind(this,col.ID)}   icon="right"></Button>		
+									      </Col>
+								     </Row> 
 						     </div>	
 					    </div>
-				        <div className='monitor-timeline' style={{display:this.props.display}}>
+				        <div className='monitor-timeline' style={{display:this.state.display}}  ref="line"  id={col.ID}>
 						      <Timeline>
 								    <Timeline.Item color="#e9e9e9">Create a services site 2015-09-01</Timeline.Item>
 								    <Timeline.Item color="#e9e9e9">Solve initial network problems 2015-09-01</Timeline.Item>

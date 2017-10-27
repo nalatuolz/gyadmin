@@ -83,7 +83,6 @@ class OrderInForm extends Component {
   }
 
 	changeOperationStyle(val) {
-    debugger
 		if (val == 7) {
 			this.setState({"showBackReason":true})
 		}else {
@@ -294,8 +293,8 @@ class OrderInForm extends Component {
         <FormItem
           {...formItemLayout}
           label="业务类型：">
-          <Select  notFoundContent="无法找到" size='default' {...getFieldProps('operationtype',{initialValue:val('operationtype',1),
-          onChange:this.changeOperationStyle.bind(this)})} >
+          <Select  notFoundContent="无法找到" size='default' 
+          {...getFieldProps('operationtype',{initialValue:val('operationtype',1),onChange:this.changeOperationStyle.bind(this)})} >
             <Option value={ 1 }>进货</Option>
             <Option value={ 7 }>销退</Option>
             <Option value={ 57 }>移库入</Option>

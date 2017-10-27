@@ -21,9 +21,7 @@ class Hzfwpt extends Component {
 				eTime: "2017/10/26"	,
 				businssType :2						
 			},
-			display:"none"
 		}
-
 	}
 
 	 componentDidMount() {
@@ -63,8 +61,8 @@ class Hzfwpt extends Component {
 		return (
 			<div className='content'>
 				 <h2 className='monitor-title'>轴线监控</h2>
-				 <LineForm data={dataSource} loadMethod={this.loadTable}></LineForm>   
-				 <Axisline data={dataSource} display={this.state.display}></Axisline>	 
+				 <LineForm data={dataSource} loadTable={this.loadTable.bind(this)}></LineForm>   
+				 <Axisline data={dataSource}></Axisline>	 
 			     {this.props.children}				
 			</div>
 		)

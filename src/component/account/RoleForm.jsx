@@ -19,9 +19,6 @@ class RoleForm extends Component {
   onOk() {
     var record =  this.props.record
     var formV = this.props.form.getFieldsValue()
-     console.log(record)
-      console.log(formV)
-      debugger
     if (record) {
       api.postDs('Account/RoleUpdate?name=' + encodeURIComponent(formV.name) + "&id=" + record.Id).then((res) => {
         if (!res.Result) {
