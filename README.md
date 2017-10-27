@@ -3,8 +3,8 @@
 国药 react项目
 
 ### 运行（nodejs 6.0+）
-
-```npm install
+```
+   npm install
   
    npm start (开发版本访问：http://localhost:8989/)
   
@@ -12,13 +12,16 @@
 
 
 ```
-
-
-
 ### 账户和密码
-
-```admin   
+```
+   admin   
    123456
 
 
+```
+### 新做的功能
+```
+  1.轴线
+  2.定位
+  3.轨迹
 ```
