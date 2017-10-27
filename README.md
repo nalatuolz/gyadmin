@@ -4,8 +4,6 @@
 ### 运行（nodejs 6.0+）
 ```
    npm install
- （安装所有依赖）
-
 
    npm start (开发版本访问：http://localhost:8989/)
   
@@ -15,7 +13,8 @@
 ```
 ### 账户和密码
 ```
-   账号：admin   
+   账号：admin 
+  
    密码：123456
 
 
