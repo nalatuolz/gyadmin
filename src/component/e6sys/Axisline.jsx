@@ -10,7 +10,8 @@ class Axisline extends Component {
 		this.state = {
 	     	display:"none",
 	     	visible:false,
-	     	type:1
+	     	type:1,
+	     	str:'',
 		}
 		                console.log(this);
 
@@ -53,27 +54,27 @@ class Axisline extends Component {
 	handleSwitch(id){
 		var newId=this.refs.line.id
 		console.log(this.record);
-		this.record.forEach((col) => {
-			if(id === col){
-	 			 this.setState({
-	        	   display: "block",
-		         });
+		// this.record.forEach((col) => {
+		// 	if(id === col){
+	 // 			 this.setState({
+	 //        	   display: "block",
+		//          });
 
-			}else{
-				this.setState({
-		    	   display: "none",
-			    });	
-			}
-		})
-		// if(this.state.display === "none"){
-		//     this.setState({
-  //       	   display: "block",
-	 //        });
-		// }else{
-	 // 	    this.setState({
-	 //    	   display: "none",
-		//     });
-		// }
+		// 	}else{
+		// 		this.setState({
+		//     	   display: "none",
+		// 	    });	
+		// 	}
+		// })
+		if(this.state.display === "none"){
+		    this.setState({
+        	   display: "block",
+	        });
+		}else{
+	 	    this.setState({
+	    	   display: "none",
+		    });
+		}
 	}
 
 
@@ -82,12 +83,18 @@ class Axisline extends Component {
     }
 
     render() {
-     	const data = this.props.data
+     	const data = this.props.data;
     	console.log(data);
      	const itemList =data.map((col) => {
      		var  BaseData=col.BaseData
  			var  HonNodes=col.HonNodes
  			var  VerNodes=col.VerNodes 
+ 		    var  StepDom= HonNodes.map((item) => {
+					return <Step title={item.Name} description={item.Time} />
+				 })
+ 		    var  TimelineDom= VerNodes.map((item) => {
+					return <Timeline.Item color="#e9e9e9">{item.Name} {item.Time}</Timeline.Item>
+				 })
  			this.record.push(col.ID)
   		 	return 	<div className='monitor-list'>
 	  		 			<div className='monitor-item'>
@@ -105,13 +112,8 @@ class Axisline extends Component {
 						     <div className='monitor-des'>
 							     	 <Row gutter={10}>
 										  <Col sm={23}>
-										  		  <Steps current={0} >
-													    <Step status="finish" title={HonNodes.Name} description={HonNodes.Time} />
-													    <Step status="finish" title="Progress" description="This is a descripti" />
-													    <Step status="finish" title="Waiting" description="This is a descripti" />
-													    <Step title="Waiting" description="This is a description." />
-												        <Step title="Waiting" description="This is a description." />
-												        <Step title="Waiting" description="This is a description." />
+										  		  <Steps current={HonNodes.length-1} >
+										  		 		{StepDom}
 									 			 </Steps>
 										  </Col>
 									      <Col sm={1}>
@@ -122,10 +124,7 @@ class Axisline extends Component {
 					    </div>
 				        <div className='monitor-timeline' style={{display:this.state.display}}  ref="line"  id={col.ID}>
 						      <Timeline>
-								    <Timeline.Item color="#e9e9e9">Create a services site 2015-09-01</Timeline.Item>
-								    <Timeline.Item color="#e9e9e9">Solve initial network problems 2015-09-01</Timeline.Item>
-								    <Timeline.Item color="#e9e9e9">Technical testing 2015-09-01</Timeline.Item>
-								    <Timeline.Item color="#e9e9e9">Network problems being solved 2015-09-01</Timeline.Item>
+								    {TimelineDom}
 							  </Timeline>
 			  		    </div>
 				  </div>
