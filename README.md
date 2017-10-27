@@ -1,11 +1,10 @@
 ﻿# gyadmin
-
 国药 react项目
 
 ### 运行（nodejs 6.0+）
 ```
    npm install
-（安装所有依赖）
+ （安装所有依赖）
 
 
    npm start (开发版本访问：http://localhost:8989/)
