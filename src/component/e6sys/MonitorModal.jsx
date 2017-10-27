@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {Modal} from 'antd'
 import api from '../../common/Api'
-import { Link } from 'react-router'
 
 class MonitorModal extends Component {
 	constructor(props) {
