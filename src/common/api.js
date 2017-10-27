@@ -2,7 +2,7 @@ import $ from 'jquery'
 import immutable from 'Immutable' 
 var df = require("dateformat")
 
-// var prev_url = "http://124.193.86.7/api/555555"
+// var prev_url = "http://124.193.86.7/api/"
 var prev_url = "http://nplc.e6xayf.com/api/"
 
 var menus = immutable.fromJS([
