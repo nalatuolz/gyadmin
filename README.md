@@ -1,2 +1,24 @@
-# gyadmin
+﻿# gyadmin
+
 国药 react项目
+
+### 运行（nodejs 6.0+）
+
+```npm install
+  
+   npm start (开发版本访问：http://localhost:8989/)
+  
+   npm build （发布生产版本）
+
+
+```
+
+
+
+### 账户和密码
+
+```admin   
+   123456
+
+
+```
