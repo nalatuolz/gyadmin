@@ -25,14 +25,6 @@ class LineForm extends Component {
 		super(props)
 		this.state = {
 			isValidate: false,
-			params:{
-				customerName :"",
-				erpNo : "",
-				xpNo: "",
-				bTime: "",
-				eTime: ""	,
-				businssType :""						
-			},
 		}
 	}
 	val(field,defVal) {
@@ -66,12 +58,13 @@ class LineForm extends Component {
 					customerName  : rs.customerName  ? rs.customerName: "",
 					erpNo:  rs.erpNo ? rs.erpNo : "",
 					xpNo:  rs.xpNo ? rs.xpNo : "",
-					bTime: rs.bTime ? Moment(rs.bTime).format('YYYY-MM-DD HH:mm:ss') : "",
-					eTime: rs.eTime ? Moment(rs.eTime).format('YYYY-MM-DD HH:mm:ss') : "",
-					businssType: rs.businssType ? rs.businssType : ""
+					bTime: rs.bTime ? Moment(rs.bTime).format('YYYY/MM/DD') : "",
+					eTime: rs.eTime ? Moment(rs.eTime).format('YYYY/MM/DD') : "",
+					businessType: rs.businessType ? rs.businessType : ""
 				}				
 		this.setState(this.state)	  
-		this.props.loadTable()
+		this.props.loadTable(this.state.params)
+		// this.props.onSearch(this.state.params)
 	}
 
 	//改变业务类型的value值
@@ -103,8 +96,8 @@ class LineForm extends Component {
 						            {...formItemLayout}
 						            required={this.state.isValidate}
 						            label="输入客户">
-						            <Input  autoComplete="off" size='default' {...getFieldProps('customer',{
-											initialValue: val('customer')
+						            <Input  autoComplete="off" size='default' {...getFieldProps('customerName',{
+											initialValue: val('customerName')
 										})}  />
 					            </FormItem>
 						   </Col>
@@ -113,7 +106,8 @@ class LineForm extends Component {
 						            {...formItemLayout}
 						            required={this.state.isValidate}
 						            label="ERP单号">
-						            <Input  autoComplete="off" size='default' {...getFieldProps('ownerID')}  />
+						            <Input  autoComplete="off" size='default' {...getFieldProps('erpNo',{
+											initialValue: val('erpNo')})}  />
 					            </FormItem>
      					  </Col>
 					      <Col sm={7}>
@@ -121,7 +115,8 @@ class LineForm extends Component {
    									{...formItemLayout}
    									required={this.state.isValidate}
 						            label="货主原单号">
-							     <Input  autoComplete="off" size='default' {...getFieldProps('ownerNumber')}  />
+							     <Input  autoComplete="off" size='default' {...getFieldProps('xpNo',{
+											initialValue: val('xpNo')})}  />
 						        </FormItem>						        
 					      </Col>
    				    </Row>
@@ -131,7 +126,7 @@ class LineForm extends Component {
 							          {...formItemLayout}
 							            required={this.state.isValidate} hasFeedback={this.state.isValidate}
 							          label="开始时间">
-									 <DatePicker format='yyyy/MM/dd'  size='default'   {...getFieldProps('startTime',{initialValue:val('startTime',now)})} />							          
+									 <DatePicker format='yyyy/MM/dd'  size='default'   {...getFieldProps('bTime',{initialValue:val('startTime',now)})} />							          
 						        </FormItem>
 						   </Col>
 					       <Col sm={7}>
@@ -139,7 +134,7 @@ class LineForm extends Component {
 							          {...formItemLayout}
 							            required={this.state.isValidate} hasFeedback={this.state.isValidate}
 							          label="结束时间">
-							          <DatePicker format='yyyy/MM/dd'    size='default' {...getFieldProps('endTime',{initialValue:val('endTime',now)})}  />
+							          <DatePicker format='yyyy/MM/dd'    size='default' {...getFieldProps('eTime',{initialValue:val('endTime',now)})}  />
 						        </FormItem>	
      					  </Col>
 					      <Col sm={7}>
@@ -148,7 +143,7 @@ class LineForm extends Component {
 						            required={this.state.isValidate}
 						          label="业务类型">
 						          <Select notFoundContent="无法找到"  size='default'
-						           {...getFieldProps('businessType',{initialValue:val('businessType',1),onChange:this.onTypeChange.bind(this)})} >
+						           {...getFieldProps('businessType',{initialValue:val('businessType'),onChange:this.onTypeChange.bind(this)})} >
 						             <Option value={ 1 }>配送</Option>
 						             <Option value={ 2 }>外阜</Option>
 						             <Option value={ 3 }>销退</Option>

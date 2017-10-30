@@ -11,10 +11,7 @@ class Axisline extends Component {
 	     	display:"none",
 	     	visible:false,
 	     	type:1,
-	     	str:'',
 		}
-		                console.log(this);
-
 		this.record = []
 	}
 
@@ -66,15 +63,15 @@ class Axisline extends Component {
 		// 	    });	
 		// 	}
 		// })
-		if(this.state.display === "none"){
-		    this.setState({
-        	   display: "block",
-	        });
-		}else{
-	 	    this.setState({
-	    	   display: "none",
-		    });
-		}
+		// if(this.state.display === "none"){
+		//     this.setState({
+  //       	   display: "block",
+	 //        });
+		// }else{
+	 // 	    this.setState({
+	 //    	   display: "none",
+		//     });
+		// }
 	}
 
 
@@ -83,17 +80,21 @@ class Axisline extends Component {
     }
 
     render() {
-     	const data = this.props.data;
-    	console.log(data);
+    	//获取数据
+     	const data = this.props.data
+     	//获取业务类型  只有业务类型 businssType为2的时候纵轴才显示
+     	const businssType = this.props.businssType
+     	const isShow = businssType != 2 ? "none" : "block"
+ 		console.log(data)
      	const itemList =data.map((col) => {
      		var  BaseData=col.BaseData
  			var  HonNodes=col.HonNodes
- 			var  VerNodes=col.VerNodes 
+ 			var  VerNodes=col.VerNodes ? col.VerNodes :[]
+ 		    var  TimeDom= VerNodes.map((item) => {
+					return <Timeline.Item color="#e9e9e9">{item.Name} {item.Time}</Timeline.Item>
+				 })
  		    var  StepDom= HonNodes.map((item) => {
 					return <Step title={item.Name} description={item.Time} />
-				 })
- 		    var  TimelineDom= VerNodes.map((item) => {
-					return <Timeline.Item color="#e9e9e9">{item.Name} {item.Time}</Timeline.Item>
 				 })
  			this.record.push(col.ID)
   		 	return 	<div className='monitor-list'>
@@ -105,8 +106,22 @@ class Axisline extends Component {
 								      <Col sm={3}>车牌：{BaseData.VehicleNo}</Col>
 			 						  <Col sm={3}>订单类型：{BaseData.OrderTranType}</Col>	
 			 						  <Col sm={9}>客户：{BaseData.CustomerName}</Col>
-			 						  <Col sm={1}><Button className="btn-location btn-group" onClick={this.handleLocation.bind(this)} title="定位"  size="small"   icon="environment"></Button></Col>
-			 						  <Col sm={1}><Button className="btn-contrail btn-group" onClick={this.handleContrail.bind(this)} title="轨迹"  size="small"   icon="bars"></Button></Col>	
+			 						  <Col sm={1}>
+				 						  <Button className="btn-location btn-group" 
+				 						  onClick={this.handleLocation.bind(this)} 
+				 						  title="定位"  
+				 						  size="small"   
+				 						  icon="environment">
+				 						  </Button>
+			 						  </Col>
+			 						  <Col sm={1}>
+				 						  <Button className="btn-contrail btn-group" 
+				 						  onClick={this.handleContrail.bind(this)} 
+				 						  title="轨迹"  
+				 						  size="small"   
+				 						  icon="bars">
+				 						  </Button>
+			 						  </Col>	
 							     </Row> 
 					         </div>	
 						     <div className='monitor-des'>
@@ -116,7 +131,7 @@ class Axisline extends Component {
 										  		 		{StepDom}
 									 			 </Steps>
 										  </Col>
-									      <Col sm={1}>
+									      <Col sm={1} style={{display:isShow}}>
 									      		<Button className="btn-switch" onClick={this.handleSwitch.bind(this,col.ID)}   icon="right"></Button>		
 									      </Col>
 								     </Row> 
@@ -124,13 +139,13 @@ class Axisline extends Component {
 					    </div>
 				        <div className='monitor-timeline' style={{display:this.state.display}}  ref="line"  id={col.ID}>
 						      <Timeline>
-								    {TimelineDom}
+								    {TimeDom}
 							  </Timeline>
 			  		    </div>
 				  </div>
         })
  		return (
- 				<div>
+ 				<div className='monitor-container'>
 					<div className='monitor-content'>
 						 {itemList}
 					</div> 
