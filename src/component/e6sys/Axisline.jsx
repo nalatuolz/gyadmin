@@ -8,7 +8,6 @@ class Axisline extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-	     	display:"none",
 	     	visible:false,
 	     	type:1,
 		}
@@ -83,6 +82,7 @@ class Axisline extends Component {
     	//获取数据
      	const data = this.props.data
      	//获取业务类型  只有业务类型 businssType为2的时候纵轴才显示
+     	const isDisplay = this.props.isDisplay
      	const businssType = this.props.businssType
      	const isShow = businssType != 2 ? "none" : "block"
      	const itemList =data.map((col) => {
@@ -136,7 +136,7 @@ class Axisline extends Component {
 								     </Row> 
 						     </div>	
 					    </div>
-				        <div className='monitor-timeline' style={{display:this.state.display}}  ref="line"  id={col.ID}>
+				        <div className='monitor-timeline' style={{display:isDisplay}}  ref="line"  id={col.ID}>
 						      <Timeline>
 								    {TimeDom}
 							  </Timeline>

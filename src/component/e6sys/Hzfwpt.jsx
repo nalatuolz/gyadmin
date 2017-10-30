@@ -47,14 +47,16 @@ class Hzfwpt extends Component {
 							businssType : params.businssType			
 						},
 				    })
+	    		    //判断有几条数据，一条的时候并且业务类型是外阜的时候默认加载纵向轴节点
+			        const len = this.state.dataSource.length
+			        const type = params.businssType
+			        if(len===1 && type == 2){
+			        	this.setState({
+			        		display:"block"
+			        	})
+			        }
         		}
 			})
-        //判断有几条数据，一条的时候默认加载纵向轴节点
-        const len=this.state.dataSource
-        if(len===1){
-        	this.state.display="block"
-        	this.setState()
-        }
     }
 
     render() {
@@ -67,7 +69,7 @@ class Hzfwpt extends Component {
 			<div className='content'>
 				 <h2 className='monitor-title'>轴线监控</h2>
 				 <LineForm data={dataSource} loadTable={this.loadTable.bind(this)} ></LineForm>   
-				 <Axisline data={dataSource} businssType={this.state.params.businssType}></Axisline>	 
+				 <Axisline data={dataSource} businssType={this.state.params.businssType} isDisplay={this.state.display}></Axisline>	 
 			     {this.props.children}				
 			</div>
 		)
