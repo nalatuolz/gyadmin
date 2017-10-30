@@ -85,7 +85,6 @@ class Axisline extends Component {
      	//获取业务类型  只有业务类型 businssType为2的时候纵轴才显示
      	const businssType = this.props.businssType
      	const isShow = businssType != 2 ? "none" : "block"
- 		console.log(data)
      	const itemList =data.map((col) => {
      		var  BaseData=col.BaseData
  			var  HonNodes=col.HonNodes

@@ -38,15 +38,14 @@ class Hzfwpt extends Component {
 
    //加载数据
    loadTable(params){
-   		alert()
-   		console.log(params);
         api.postDs("Data/OrderMonit", params).then((res) => {
         	if(res.Result){
-        		console.log(22);
-        		console.log(res.Data);
 			    	this.setState({
 						loading: false,
-						dataSource:res.Data
+						dataSource:res.Data,
+						params:{
+							businssType : params.businssType			
+						},
 				    })
         		}
 			})

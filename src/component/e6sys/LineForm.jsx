@@ -60,11 +60,10 @@ class LineForm extends Component {
 					xpNo:  rs.xpNo ? rs.xpNo : "",
 					bTime: rs.bTime ? Moment(rs.bTime).format('YYYY/MM/DD') : "",
 					eTime: rs.eTime ? Moment(rs.eTime).format('YYYY/MM/DD') : "",
-					businessType: rs.businessType ? rs.businessType : ""
+					businssType: rs.businssType ? rs.businssType : ""
 				}				
 		this.setState(this.state)	  
 		this.props.loadTable(this.state.params)
-		// this.props.onSearch(this.state.params)
 	}
 
 	//改变业务类型的value值
@@ -143,7 +142,7 @@ class LineForm extends Component {
 						            required={this.state.isValidate}
 						          label="业务类型">
 						          <Select notFoundContent="无法找到"  size='default'
-						           {...getFieldProps('businessType',{initialValue:val('businessType'),onChange:this.onTypeChange.bind(this)})} >
+						           {...getFieldProps('businssType',{initialValue:val('businssType'),onChange:this.onTypeChange.bind(this)})} >
 						             <Option value={ 1 }>配送</Option>
 						             <Option value={ 2 }>外阜</Option>
 						             <Option value={ 3 }>销退</Option>
