@@ -48,7 +48,7 @@ class Axisline extends Component {
 
 	//点击切换显示纵轴
 	handleSwitch(id){
-        var dis=this.state.display;
+        var dis=this.state.display
 	    if(this.state.display[id]=="none"||typeof this.state.display[id]=='undefined'){
 	      dis[id]='block';
 	        this.setState({
@@ -61,7 +61,10 @@ class Axisline extends Component {
 	        });
 	    }
     }
-
+    handleLoadingMore(e){
+    	alert()
+		e.preventDefault();
+    }
 
 	componentDidMount() {
 
@@ -146,6 +149,9 @@ class Axisline extends Component {
 						 {itemList}
 					</div> 
 				    <MonitorModal  visible={this.state.visible} type={this.state.type} onOk={this.handleOk.bind(this)} onCancel={this.handleCancel.bind(this)}></MonitorModal>
+				    <div className='loading-more'>
+						<Button title="下拉更多数据" onClick={this.handleLoadingMore.bind(this)}  icon="double-right">下拉更多数据</Button>	
+				    </div>
 				</div>
 		)
 	}

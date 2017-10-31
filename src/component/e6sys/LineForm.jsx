@@ -31,24 +31,10 @@ class LineForm extends Component {
 		return (this.updatingRow ? this.updatingRow[field] : defVal)
 	}
 
-	componentWillMount() {
-		//let row = this.props.location.query.row
-		//if (row) {
-			//this.updatingRow = JSON.parse(row)
-			//this.updatingRow["startTime"] = new Date(this.updatingRow["startTime"]) 
-			//this.updatingRow["endTime"] = new Date(this.updatingRow["endTime"]) 
-			//this.setState(this.state)
-		//} 
-	}
 
-	 componentDidMount() {
-		//var row = this.props.location.query.row
-		//if (!row) {
-			//this.updatingRow = null
-			//let form = this.props.form
-		//}
+	componentDidMount() {
 		
-   }
+    }
 
 	//点击搜索按钮事件
 	handleSearch(e) {
@@ -68,7 +54,6 @@ class LineForm extends Component {
 
 	//改变业务类型的value值
 	onTypeChange(val) {
-		alert(val)
 		if (val == 7) {
 			this.setState({"showBackReason":true})
 		}else {
@@ -76,8 +61,8 @@ class LineForm extends Component {
 		}
 	    let form = this.props.form
 	    form.setFieldsValue({
-	      sourcecompanyid: undefined,
-	      companyname: undefined 
+		      sourcecompanyid: undefined,
+		      companyname: undefined 
 	    })
 	}
 
