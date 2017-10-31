@@ -10,9 +10,8 @@ class Axisline extends Component {
 		this.state = {
 	     	visible:false,
 	     	type:1,
-	     	display:"none"
+	     	display:{}
 		}
-		this.record = []
 	}
 
 	//点击定位按钮
@@ -49,32 +48,19 @@ class Axisline extends Component {
 
 	//点击切换显示纵轴
 	handleSwitch(id){
-		var newId=this.refs.line.id
-		var isShow = this.props.isDisplay
-		console.log(isShow);
-		console.log(this.record);
-		// this.record.forEach((col) => {
-		// 	if(id === col){
-	 // 			 this.setState({
-	 //        	   display: "block",
-		//          });
-
-		// 	}else{
-		// 		this.setState({
-		//     	   display: "none",
-		// 	    });	
-		// 	}
-		// })
-		if(this.state.display === "none"){
-		    this.setState({
-        	   display: "block",
+        var dis=this.state.display;
+	    if(this.state.display[id]=="none"||typeof this.state.display[id]=='undefined'){
+	      dis[id]='block';
+	        this.setState({
+	             display: dis,
+	          });
+	    }else{
+	      dis[id]='none';
+	         this.setState({
+	            display: dis,
 	        });
-		}else{
-	 	    this.setState({
-	    	   display: "none",
-		    });
-		}
-	}
+	    }
+    }
 
 
 	componentDidMount() {
@@ -90,18 +76,14 @@ class Axisline extends Component {
 		}
     	
      	//获取业务类型  只有业务类型 businssType为2的时候纵轴才显示 
-     	var  isDisplay = null
+     	var  isDisplay = this.state.display
      	const businssType = this.props.businssType
      	const isShow = businssType != 2 ? "none" : "block"
      	//判断
-     	if(data.length === 1 && businssType === 2){
-			isDisplay = this.props.display
-			console.log(1)
-     	}else{
-			isDisplay = this.state.display
-			console.log(2)
-     	}
      	const itemList =data.map((col) => {
+     		 if(data.length === 1 && businssType === 2){
+	      		  isDisplay[col.ID]='block'
+	         }
      		var  BaseData=col.BaseData
  			var  HonNodes=col.HonNodes
  			var  VerNodes=col.VerNodes ? col.VerNodes :[]
@@ -111,7 +93,6 @@ class Axisline extends Component {
  		    var  StepDom= HonNodes.map((item) => {
 					return <Step title={item.Name} description={item.Time} />
 				 })
- 			this.record.push(col.ID)
   		 	return 	<div className='monitor-list'>
 	  		 			<div className='monitor-item'>
 	  		 		         <div className='monitor-tip'>
@@ -152,7 +133,7 @@ class Axisline extends Component {
 								     </Row> 
 						     </div>	
 					    </div>
-				        <div className='monitor-timeline' style={{display:isDisplay}}  ref="line"  id={col.ID}>
+				        <div className='monitor-timeline' style={{display:isDisplay[col.ID]||'none'}}  id={col.ID}>
 						      <Timeline>
 								    {TimeDom}
 							  </Timeline>
