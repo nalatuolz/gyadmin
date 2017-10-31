@@ -60,8 +60,8 @@ class Hzfwpt extends Component {
     }
 
     render() {
-       	var dataSource=this.state.dataSource;
-       	console.log(dataSource);
+       	const dataSource = this.state.dataSource
+       	console.log(dataSource)
 		if (this.state.loading) {
 			return <div className='loading-bar'> 正在努力加载数据中...请稍候</div>
 		}

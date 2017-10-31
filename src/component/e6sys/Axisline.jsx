@@ -10,6 +10,7 @@ class Axisline extends Component {
 		this.state = {
 	     	visible:false,
 	     	type:1,
+	     	display:"none"
 		}
 		this.record = []
 	}
@@ -32,7 +33,7 @@ class Axisline extends Component {
 	    });
 	}
 
-		//点击确认按钮
+	//点击确认按钮
 	handleOk (){
 	    this.setState({
 	      visible: false,
@@ -49,6 +50,8 @@ class Axisline extends Component {
 	//点击切换显示纵轴
 	handleSwitch(id){
 		var newId=this.refs.line.id
+		var isShow = this.props.isDisplay
+		console.log(isShow);
 		console.log(this.record);
 		// this.record.forEach((col) => {
 		// 	if(id === col){
@@ -62,29 +65,42 @@ class Axisline extends Component {
 		// 	    });	
 		// 	}
 		// })
-		// if(this.state.display === "none"){
-		//     this.setState({
-  //       	   display: "block",
-	 //        });
-		// }else{
-	 // 	    this.setState({
-	 //    	   display: "none",
-		//     });
-		// }
+		if(this.state.display === "none"){
+		    this.setState({
+        	   display: "block",
+	        });
+		}else{
+	 	    this.setState({
+	    	   display: "none",
+		    });
+		}
 	}
 
 
 	componentDidMount() {
-	 
+
     }
 
     render() {
     	//获取数据
      	const data = this.props.data
-     	//获取业务类型  只有业务类型 businssType为2的时候纵轴才显示
-     	const isDisplay = this.props.isDisplay
+     	//如果没有数据
+    	if (!data.length) {
+			return <div className='loading-nodata'> 没有查到相关数据！</div>
+		}
+    	
+     	//获取业务类型  只有业务类型 businssType为2的时候纵轴才显示 
+     	var  isDisplay = null
      	const businssType = this.props.businssType
      	const isShow = businssType != 2 ? "none" : "block"
+     	//判断
+     	if(data.length === 1 && businssType === 2){
+			isDisplay = this.props.display
+			console.log(1)
+     	}else{
+			isDisplay = this.state.display
+			console.log(2)
+     	}
      	const itemList =data.map((col) => {
      		var  BaseData=col.BaseData
  			var  HonNodes=col.HonNodes
@@ -131,7 +147,7 @@ class Axisline extends Component {
 									 			 </Steps>
 										  </Col>
 									      <Col sm={1} style={{display:isShow}}>
-									      		<Button className="btn-switch" onClick={this.handleSwitch.bind(this,col.ID)}   icon="right"></Button>		
+									      		<Button className="btn-switch" title="点击切换显示纵轴" onClick={this.handleSwitch.bind(this,col.ID)}   icon="right"></Button>		
 									      </Col>
 								     </Row> 
 						     </div>	
