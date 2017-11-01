@@ -101,7 +101,7 @@ class Axisline extends Component {
 	  		 		         <div className='monitor-tip'>
 								 <Row gutter={10}>
 									  <Col sm={3}>ERP单号：{BaseData.ERPNo}</Col>
-								      <Col sm={3}>业务类型：{BaseData.OrderTranType}</Col>
+	[]							      <Col sm={3}>业务类型：{BaseData.OrderTranType}</Col>
 								      <Col sm={3}>车牌：{BaseData.VehicleNo}</Col>
 			 						  <Col sm={3}>订单类型：{BaseData.OrderTranType}</Col>	
 			 						  <Col sm={9}>客户：{BaseData.CustomerName}</Col>

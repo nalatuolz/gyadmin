@@ -28,6 +28,7 @@ class LineForm extends Component {
 		}
 		//获取存储在本地上的用户id
 		this.goodsownerid  = localStorage.getItem("GoodsOwnerId") 
+
 		//获取存储在本地上的用户名
 		this.goodsownername = localStorage.getItem("GoodsOwnerName")
 		if (this.goodsownername == "null") {
@@ -77,7 +78,6 @@ class LineForm extends Component {
     render() {
   	    const { getFieldProps,getFieldValue } = this.props.form
   	    const isShow = this.goodsownerid == 0 ? "block" : "none"
-  	    console.log(isShow)
 		let now = new Date() 
 		let val = this.val.bind(this)
 

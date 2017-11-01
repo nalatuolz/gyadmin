@@ -3,7 +3,6 @@ import api from '../../common/Api'
 import MsForm from '../MsForm'
 import LineForm from './LineForm'
 import Axisline from './Axisline'
-import { Link } from 'react-router'
 var { Map, List } = require('Immutable')
 
 class Hzfwpt extends Component {
@@ -54,7 +53,6 @@ class Hzfwpt extends Component {
 
     render() {
        	const dataSource = this.state.dataSource
-       	console.log(dataSource)
 		if (this.state.loading) {
 			return <div className='loading-bar'> 正在努力加载数据中...请稍候</div>
 		}
