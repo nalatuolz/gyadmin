@@ -16,6 +16,7 @@ class Hzfwpt extends Component {
 			params:{
 				customerName :"",
 				erpNo : "",
+				useID : "",
 				xpNo: "",
 				bTime: "2017/10/26",
 				eTime: "2017/10/26"	,

@@ -26,6 +26,13 @@ class LineForm extends Component {
 		this.state = {
 			isValidate: false,
 		}
+		//获取存储在本地上的用户id
+		this.goodsownerid  = localStorage.getItem("GoodsOwnerId") 
+		//获取存储在本地上的用户名
+		this.goodsownername = localStorage.getItem("GoodsOwnerName")
+		if (this.goodsownername == "null") {
+			this.goodsownername = ''
+		}
 	}
 	val(field,defVal) {
 		return (this.updatingRow ? this.updatingRow[field] : defVal)
@@ -43,6 +50,7 @@ class LineForm extends Component {
 		this.state.params={
 					customerName  : rs.customerName  ? rs.customerName: "",
 					erpNo:  rs.erpNo ? rs.erpNo : "",
+					userID:  rs.userID ? rs.userID : "",
 					xpNo:  rs.xpNo ? rs.xpNo : "",
 					bTime: rs.bTime ? Moment(rs.bTime).format('YYYY/MM/DD') : "",
 					eTime: rs.eTime ? Moment(rs.eTime).format('YYYY/MM/DD') : "",
@@ -68,6 +76,8 @@ class LineForm extends Component {
 
     render() {
   	    const { getFieldProps,getFieldValue } = this.props.form
+  	    const isShow = this.goodsownerid == 0 ? "block" : "none"
+  	    console.log(isShow)
 		let now = new Date() 
 		let val = this.val.bind(this)
 
@@ -75,7 +85,7 @@ class LineForm extends Component {
 		 	<div className='monitor-search'>
 				 <Form horizontal className='gy-content' >
 					<Row gutter={10}>
-						   <Col sm={7}>
+						   <Col sm={6}>
 							   <FormItem
 						            {...formItemLayout}
 						            required={this.state.isValidate}
@@ -85,7 +95,16 @@ class LineForm extends Component {
 										})}  />
 					            </FormItem>
 						   </Col>
-					       <Col sm={7}>
+						   <Col sm={6} style={{display:isShow}}>
+                                <FormItem
+   									{...formItemLayout}
+   									required={this.state.isValidate}
+						            label="货主ID">
+							     <Input  autoComplete="off" size='default' {...getFieldProps('userID',{
+											initialValue: val('userID')})}  />
+						        </FormItem>						        
+					      </Col>
+					       <Col sm={6}>
 					           <FormItem
 						            {...formItemLayout}
 						            required={this.state.isValidate}
@@ -94,7 +113,7 @@ class LineForm extends Component {
 											initialValue: val('erpNo')})}  />
 					            </FormItem>
      					  </Col>
-					      <Col sm={7}>
+					      <Col sm={6}>
                                 <FormItem
    									{...formItemLayout}
    									required={this.state.isValidate}
@@ -105,7 +124,7 @@ class LineForm extends Component {
 					      </Col>
    				    </Row>
 					<Row gutter={10}>
-						   <Col sm={7}>
+						   <Col sm={6}>
 							   <FormItem
 							          {...formItemLayout}
 							            required={this.state.isValidate} hasFeedback={this.state.isValidate}
@@ -113,7 +132,7 @@ class LineForm extends Component {
 									 <DatePicker format='yyyy/MM/dd'  size='default'   {...getFieldProps('bTime',{initialValue:val('startTime',now)})} />							          
 						        </FormItem>
 						   </Col>
-					       <Col sm={7}>
+					       <Col sm={6}>
 					          <FormItem
 							          {...formItemLayout}
 							            required={this.state.isValidate} hasFeedback={this.state.isValidate}
@@ -121,13 +140,13 @@ class LineForm extends Component {
 							          <DatePicker format='yyyy/MM/dd'    size='default' {...getFieldProps('eTime',{initialValue:val('endTime',now)})}  />
 						        </FormItem>	
      					  </Col>
-					      <Col sm={7}>
+					      <Col sm={6}>
 						       <FormItem
 						          {...formItemLayout}
 						            required={this.state.isValidate}
 						          label="业务类型">
 						          <Select notFoundContent="无法找到"  size='default'
-						           {...getFieldProps('businssType',{initialValue:val('businssType'),onChange:this.onTypeChange.bind(this)})} >
+						           {...getFieldProps('businssType',{initialValue:val('businssType',1),onChange:this.onTypeChange.bind(this)})} >
 						             <Option value={ 1 }>配送</Option>
 						             <Option value={ 2 }>外阜</Option>
 						             <Option value={ 3 }>销退</Option>
@@ -135,7 +154,7 @@ class LineForm extends Component {
 						          </Select>
 						        </FormItem>					        
 					      </Col>
- 						  <Col sm={3}>
+ 						  <Col sm={4}>
 								<FormItem {...formItemLayout}>
 						 			<Button className="btn-search"  size="large" type="primary"  icon="search" onClick={this.handleSearch.bind(this)}></Button>
 								</FormItem>						        				        
