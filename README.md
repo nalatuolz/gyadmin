@@ -6,8 +6,7 @@
 ```
    下载 git clone https://github.com/lfg316140866/gyadmin.git
    cd gyadmin
-   npm install
-(安装依赖模块)
+   npm install（安装依赖模块）
    npm start (开发版本访问：http://localhost:8989/)
   
    npm build （发布生产版本）
