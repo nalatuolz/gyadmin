@@ -9,7 +9,9 @@
    npm install（安装依赖模块）
    npm start （开发版本访问：http://localhost:8989/）
 
- 
+
+   npm build （发布生产版本）
+
    因为远程服务器链接有问题，所在在本地临时部署了一个临时服务器
    运行项目的时候要在host文件里面添加本地服务器地址	172.16.56.96 nplc.e6xayf.com
 ``` 
